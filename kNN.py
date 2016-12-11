@@ -30,7 +30,7 @@ def classify0(inX, dataSet, labels, k):
 
     return sortedClassCount[0][0] # get top one element
 
-def main(alist):
+def main():
 
     if len(sys.argv) == 5:
         try:
@@ -65,4 +65,4 @@ def main(alist):
         print("Build-in Result:",classify0([1,1],groups,labels,3))
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
