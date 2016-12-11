@@ -1,5 +1,6 @@
 from numpy import *
 import operator
+import sys
 
 # Use Python to generate and import the data
 def createDataSet():
@@ -29,6 +30,39 @@ def classify0(inX, dataSet, labels, k):
 
     return sortedClassCount[0][0] # get top one element
 
+def main(alist):
+
+    if len(sys.argv) == 5:
+        try:
+            groups = eval(sys.argv[1])
+        except (NameError, SyntaxError):
+            groups = sys.argv[1]
+        try:
+            labels = eval(sys.argv[2])
+        except (NameError, SyntaxError):
+            labels = sys.argv[2]
+        try:
+            topN = eval(sys.argv[3])
+        except (NameError, SyntaxError):
+            topN = sys.argv[3]
+        try:
+            testData = eval(sys.argv[4])
+        except (NameError, SyntaxError):
+            testData = sys.argv[4]
+        if isinstance(groups, list) and isinstance(labels, list) and isinstance(topN, int) and isinstance(testData,list):
+            groups = array(groups)
+            if groups.ndim == 2 and groups.shape[0] == len(labels) and groups.shape[1] == len(testData):
+                print("Result:", classify0(testData, groups, labels, topN))
+            else:
+                print("Matrix Shape ERROR\nUsage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+        else:
+            print("Type Error\nUsage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+    else:
+        print("Usage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+        print("Examle: DATA_LIST = [[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]], LABEL = ['A','A','B','B'], TOPN = 3")
+        print("Input data is [1,1]: ")
+        groups, labels = createDataSet()
+        print("Build-in Result:",classify0([1,1],groups,labels,3))
+
 if __name__ == "__main__":
-    groups, labels = createDataSet()
-    print classify0([1,1],groups,labels,3)
+    main(sys.argv)
