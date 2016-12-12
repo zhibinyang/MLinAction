@@ -30,6 +30,23 @@ def classify0(inX, dataSet, labels, k):
 
     return sortedClassCount[0][0] # get top one element
 
+def kNN(training_data, answer_data, topN, example):
+    if training_data and answer_data and topN and example:
+        if isinstance(training_data, list) and isinstance(answer_data, list) and isinstance(topN, int) and isinstance(example,list):
+            groups = array(training_data)
+            if groups.ndim == 2 and groups.shape[0] == len(answer_data) and groups.shape[1] == len(example):
+                print("Result:", classify0(example, groups, answer_data, topN))
+            else:
+                print("Matrix Shape ERROR\nUsage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+        else:
+            print("Type Error\nUsage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+    else:
+        print("Usage: python kNN.py DATA_LIST LABEL TOPN TESTDATA")
+        print("Examle: DATA_LIST = [[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]], LABEL = ['A','A','B','B'], TOPN = 3")
+        print("Input data is [1,1]: ")
+        groups, labels = createDataSet()
+        print("Build-in Result:",classify0([1,1],groups,labels,3))
+
 def main():
 
     if len(sys.argv) == 5:
