@@ -1,2 +1,6 @@
 .idea/
+.DS_Store
+kNN/
 *.pyc
+*.jpg
+*.png
